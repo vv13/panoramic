@@ -6,6 +6,9 @@ import ImgBar from './components/ImgBar'
 import PhotoSphereViewer from '../lib/PhotoSphereViewer'
 
 class Panoramic extends Component {
+    state = {
+        showLoading: false,
+    }
     constructor(props, context) {
         super(props, context);
         this.selectPic = ''
@@ -19,7 +22,9 @@ class Panoramic extends Component {
         this.showPic()
     }
     showPic(url) {
-        console.log(url)
+        this.setState({
+            showLoading: true
+        })
         if (!url) return
 
         const loader = document.createElement('div');
@@ -52,7 +57,8 @@ class Panoramic extends Component {
             loading_html: loader,
 
             // Disable smooth moves to test faster
-            smooth_user_moves: false
+            smooth_user_moves: false,
+            onready: () => this.setState({showLoading: false})
         });
     }
 
@@ -61,7 +67,9 @@ class Panoramic extends Component {
         return (
             <div className="panoramic">
                 <ImgBar choose={(e) => this.showPic(e)}></ImgBar>
-                <div id="container" className="panoramic__app"></div>
+                <div id="container" className="panoramic__app">
+                </div>
+                    {this.state.showLoading && <div className="spinner"></div> }
             </div>
         );
     }
