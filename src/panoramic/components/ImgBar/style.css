@@ -1,0 +1,14 @@
+.pano__img-bar {
+    width: 100%;
+    height: 100px;
+    background-color: #fff;
+    display: flex;
+    overflow-x: auto; 
+    z-index: 1;
+}
+
+.img-bar__img {
+    height: 100px;
+    width: auto;
+    background-color: grey;
+}
